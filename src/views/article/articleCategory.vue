@@ -306,6 +306,8 @@ function handleAdd() {
   // if (queryParams.categoryType) {
   //   form.value.categoryType = parseInt(queryParams.categoryType)
   // }
+  // 기본 설정 - 문장:0
+  form.value.categoryType = 0
   form.value.categoryType = 0
 }
 
