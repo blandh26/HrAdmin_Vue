@@ -6,7 +6,7 @@
 - 支持加载动态权限菜单，多方式轻松权限控制
 - 管理员：admin
 - 密 码：123456
-- [中文版](https://github.com/ant-design/ant-design/blob/master/README-zh_CN.md)
+- [https://github.com/ant-design/ant-design/blob/master/README-zh_CN.md](https://github.com/blandh26/HrAdmin_Vue/edit/main/README-zh_CN.md)
 ```
 如果对您有帮助，您可以点右上角 “Star” 收藏一下 ，这样作者才有继续免费下去的动力，谢谢！~
 ```
