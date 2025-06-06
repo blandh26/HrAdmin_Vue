@@ -1,6 +1,4 @@
 <h2 align="center"> HrAdmin_Vue后台管理系统</h2>
-- [中文版](https://github.com/ant-design/ant-design/blob/master/README-zh_CN.md)
-为前端技术栈 [Vue3](https://v3.cn.vuejs.org)
 ## 🍟 概述
 - 本仓库为前端技术栈 [Vue3](https://v3.cn.vuejs.org) + [Element Plus](https://element-plus.org/zh-CN) + [Vite](https://cn.vitejs.dev) 版本。
 - 配套后端代码仓库地址[HrAdmin_Net](https://github.com/blandh26/HrAdmin_Net) 版本。
@@ -8,6 +6,7 @@
 - 支持加载动态权限菜单，多方式轻松权限控制
 - 管理员：admin
 - 密 码：123456
+- [中文版](https://github.com/ant-design/ant-design/blob/master/README-zh_CN.md)
 ```
 如果对您有帮助，您可以点右上角 “Star” 收藏一下 ，这样作者才有继续免费下去的动力，谢谢！~
 ```
