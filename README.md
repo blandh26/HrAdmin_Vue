@@ -5,7 +5,7 @@
 - 配套后端代码仓库地址[ZRAdmin.NET](https://gitee.com/izory/ZrAdminNetCore/) 版本。
 - 前端采用 Vue3.0、Element UI Plus、vite、compisition api、Pinia 等。
 - 支持加载动态权限菜单，多方式轻松权限控制
-  管理员：admin
+- 管理员：admin
 - 密 码：123456
 ```
 如果对您有帮助，您可以点右上角 “Star” 收藏一下 ，这样作者才有继续免费下去的动力，谢谢！~
