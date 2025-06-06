@@ -1,4 +1,5 @@
 <h2 align="center">HrAdmin_Vue 백엔드 관리 시스템</h2>
+
 [中文版](https://github.com/blandh26/HrAdmin_Vue/blob/main/README-zh_CN.md)
 
 ## 🍟 개요
