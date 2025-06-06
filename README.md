@@ -2,7 +2,7 @@
 
 ## 🍟 概述
 - 本仓库为前端技术栈 [Vue3](https://v3.cn.vuejs.org) + [Element Plus](https://element-plus.org/zh-CN) + [Vite](https://cn.vitejs.dev) 版本。
-- 配套后端代码仓库地址[ZRAdmin.NET](https://gitee.com/izory/ZrAdminNetCore/) 版本。
+- 配套后端代码仓库地址[HrAdmin_Net](https://github.com/blandh26/HrAdmin_Net) 版本。
 - 前端采用 Vue3.0、Element UI Plus、vite、compisition api、Pinia 等。
 - 支持加载动态权限菜单，多方式轻松权限控制
 - 管理员：admin
