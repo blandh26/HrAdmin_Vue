@@ -64,5 +64,5 @@ npm run dev
 6. 国际化
 
 ## 💐 特别鸣谢
-- 👉[ZRAdmin-vue](https://gitee.com/izory/ZRAdmin-vue)基础上修改
+- 👉本项目基于开源项目 ​[ZRAdmin-vue](https://gitee.com/izory/ZRAdmin-vue) 进行二次开发。
 
