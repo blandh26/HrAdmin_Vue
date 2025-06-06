@@ -1,34 +1,16 @@
-<h2 align="center"> ZRAdmin.NET后台管理系统</h2>
-
-<p align="center">
-	<a href="https://gitee.com/izory/ZrAdminNetCore"><img src="https://gitee.com/izory/ZrAdminNetCore/badge/star.svg?theme=dark"></a>
-	<a href="https://gitee.com/izory/ZrAdminNetCore/blob/master/LICENSE"><img src="https://img.shields.io/github/license/mashape/apistatus.svg"></a>
-</p>
+<h2 align="center"> HrAdmin_Vue后台管理系统</h2>
 
 ## 🍟 概述
-
 - 本仓库为前端技术栈 [Vue3](https://v3.cn.vuejs.org) + [Element Plus](https://element-plus.org/zh-CN) + [Vite](https://cn.vitejs.dev) 版本。
 - 配套后端代码仓库地址[ZRAdmin.NET](https://gitee.com/izory/ZrAdminNetCore/) 版本。
 - 前端采用 Vue3.0、Element UI Plus、vite、compisition api、Pinia 等。
 - 支持加载动态权限菜单，多方式轻松权限控制
-- 腾讯云秒杀场：[点我进入](https://curl.qcloud.com/4yEoRquq)。
-- 腾讯云优惠券：[点我领取](https://curl.qcloud.com/5J4nag8D)。
-- 七牛云通用云产品优惠券：[点我进入](https://s.qiniu.com/FzEfay)。
-
+  管理员：admin
+- 密 码：123456
 ```
 如果对您有帮助，您可以点右上角 “Star” 收藏一下 ，这样作者才有继续免费下去的动力，谢谢！~
 ```
 
-## 🍿 在线体验
-
-- 官方文档：http://www.izhaorui.cn
-- 体验地址：http://demo.izhaorui.cn/vue3
-- 管理员：admin
-- 密 码：123456
-
-```
-由于是个人项目，资金有限，体验服是低配，请大家爱惜，轻戳，不胜感激！！！
-```
 
 ## 🍁 前端运行
 
@@ -38,20 +20,15 @@ git clone https://gitee.com/izory/ZRAdmin-vue.git
 
 # 进入项目目录
 cd ZRAdmin-vue
-
 # 安装依赖
-yarn --registry=https://registry.npm.taobao.org
-
+npm install
 # 启动服务
-yarn dev
+npm run dev
 
-# 构建测试环境 yarn build:stage
-# 构建生产环境 yarn build:prod
 # 前端访问地址 http://localhost:8887
 ```
 
 ## 🍖 内置功能
-
 1. 用户管理：用户是系统操作者，该功能主要完成系统用户配置。
 2. 部门管理：配置系统组织机构（公司、部门、小组），树结构展现。
 3. 岗位管理：配置系统用户所属担任职务。
@@ -79,7 +56,6 @@ yarn dev
 25. 数据大屏：更直观的展示数据
 
 ## 🎉 优势
-
 1. 前台系统不用编写登录、授权、认证模块；只负责编写业务模块即可
 2. 后台系统无需任何二次开发，直接发布即可使用
 3. 前台与后台系统分离，分别为不同的系统（域名可独立）
@@ -88,16 +64,5 @@ yarn dev
 6. 国际化
 
 ## 💐 特别鸣谢
+- 👉[ZRAdmin-vue](https://gitee.com/izory/ZRAdmin-vue)基础上修改
 
-- 👉Ruoyi.vue：[Ruoyi](http://www.ruoyi.vip/)
-- 👉zb-admin: [zb-admin](https://gitee.com/yuanzbz/vue-admin-perfect)
-
-## 🎀 捐赠
-
-如果这个项目对您有所帮助，请扫下方二维码打赏作者喝杯咖啡。
-<img src="https://gitee.com/izory/ZrAdminNetCore/raw/master/document/images/pay.jpg"/>
-
-## 源码地址
-
-- [Gitee](https://gitee.com/izory/ZrAdminNetCore/)
-- [Github](https://github.com/izhaorui/ZrAdmin.NET/)
