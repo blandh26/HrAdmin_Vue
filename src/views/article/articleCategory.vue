@@ -122,7 +122,7 @@
     <el-dialog :title="title" :lock-scroll="false" v-model="open" width="550px">
       <el-form ref="formRef" :model="form" :rules="rules" label-width="80px">
         <el-row :gutter="20">
-          <el-col :lg="24">
+          <el-col :lg="12">
             <el-form-item label="父级id" prop="parentId">
               <el-cascader
                 class="w100"
@@ -138,7 +138,7 @@
               </el-cascader>
             </el-form-item>
           </el-col>
-          <el-col :lg="24">
+          <el-col :lg="12">
             <el-form-item label="目录分类" prop="categoryType">
               <el-select v-model="form.categoryType" placeholder="请选择分类" clearable disabled>
                 <el-option v-for="dict in categoryTypeOptions" :key="dict.dictValue" :label="dict.dictLabel" :value="parseInt(dict.dictValue)" />
@@ -151,7 +151,7 @@
             </el-form-item>
           </el-col>
 
-          <el-col :lg="24">
+          <el-col :lg="12">
             <el-form-item label="图标" prop="icon">
               <el-popover placement="bottom" :width="540" trigger="click">
                 <template #reference>
@@ -169,7 +169,7 @@
             </el-form-item>
           </el-col>
 
-          <el-col :lg="24">
+          <el-col :lg="12">
             <el-form-item label="排序" prop="orderNum">
               <el-input-number v-model="form.orderNum" placeholder="请输入排序值" />
             </el-form-item>
@@ -180,9 +180,18 @@
             </el-form-item>
           </el-col>
           <el-col :lg="24">
-            <el-form-item label="属性json" :rows="4" prop="attributeJson">
-              <el-input-tag v-model="form.attributeJson" placeholder="请输入属性json" 
-              :change="validateTag"clearable trigger="Enter" delimiter=","/>
+            <el-form-item label="属性json"  prop="attributeJson">
+              <el-input type="textarea" v-model="form.attributeJson" placeholder="请输入属性json" :rows="4"/>
+            </el-form-item>
+          </el-col>
+          <el-col :lg="24">
+            <el-form-item label="模板路径" prop="templatePath">
+              <el-input v-model="form.templatePath" placeholder="请输入模板路径" />
+            </el-form-item>
+          </el-col>
+          <el-col :lg="24">
+            <el-form-item label="属性值表" prop="attributeTable">
+              <el-input v-model="form.attributeTable" placeholder="请输入属性值表名" />
             </el-form-item>
           </el-col>
           <el-col :lg="24">
@@ -254,6 +263,8 @@ const state = reactive({
   form: {},
   rules: {
     name: [{ required: true, message: '目录名不能为空', trigger: 'blur' }],
+    templatePath: [{ required: true, message: '模板路径不能为空', trigger: 'blur' }],
+    attributeTable: [{ required: true, message: '属性值表不能为空', trigger: 'blur' }],
     // categoryType: [{ required: true, message: '目录分类不能为空', trigger: 'blur' }]
   }
 })
