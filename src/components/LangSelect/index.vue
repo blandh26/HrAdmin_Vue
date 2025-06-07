@@ -26,7 +26,8 @@ const { proxy } = getCurrentInstance()
 const langOptions = ref([
   { label: '简体中文', value: 'zh-cn' },
   { label: 'English', value: 'en' },
-  { label: '繁體中文', value: 'zh-tw' }
+  { label: '繁體中文', value: 'zh-tw' },
+  { label: '한국어', value: 'kr' }
 ])
 
 function handleLanguageChange(lang) {

@@ -125,6 +125,7 @@
       <el-table-column prop="zh-cn" :label="$t('common.chinese')" align="center" :show-overflow-tooltip="true" />
       <el-table-column prop="en" :label="$t('common.english')" align="center" :show-overflow-tooltip="true" />
       <el-table-column prop="zh-tw" :label="$t('common.traditionalChinese')" align="center" :show-overflow-tooltip="true" />
+      <el-table-column prop="kr" :label="$t('common.korean')" align="center" :show-overflow-tooltip="true" />
 
       <el-table-column :label="$t('btn.operate')" align="center" width="140">
         <template #default="scope">
@@ -301,6 +302,11 @@ function reset() {
       {
         langCode: 'en',
         label: proxy.$t('common.english'),
+        langName: undefined
+      },
+      {
+        langCode: 'kr',
+        label: proxy.$t('common.korean'),
         langName: undefined
       }
     ]

@@ -10,7 +10,7 @@ export default {
   /**
    * 侧边栏主题 深色主题theme-dark，浅色主题theme-light
    */
-  sideTheme: 'theme-dark',
+  sideTheme: 'theme-light',
   /**
    * 框架主题颜色值
    */
@@ -43,7 +43,7 @@ export default {
   /**
    * 是否显示动态标题
    */
-  dynamicTitle: false,
+  dynamicTitle: true,
 
   /**
    * @type {string | array} 'production' | ['production', 'development']

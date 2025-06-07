@@ -140,7 +140,7 @@
           </el-col>
           <el-col :lg="24">
             <el-form-item label="目录分类" prop="categoryType">
-              <el-select v-model="form.categoryType" placeholder="请选择分类" clearable>
+              <el-select v-model="form.categoryType" placeholder="请选择分类" clearable disabled>
                 <el-option v-for="dict in categoryTypeOptions" :key="dict.dictValue" :label="dict.dictLabel" :value="parseInt(dict.dictValue)" />
               </el-select>
             </el-form-item>
@@ -177,6 +177,12 @@
           <el-col :lg="24">
             <el-form-item label="介绍" prop="introduce">
               <el-input v-model="form.introduce" placeholder="请输入介绍" />
+            </el-form-item>
+          </el-col>
+          <el-col :lg="24">
+            <el-form-item label="属性json" :rows="4" prop="attributeJson">
+              <el-input-tag v-model="form.attributeJson" placeholder="请输入属性json" 
+              :change="validateTag"clearable trigger="Enter" delimiter=","/>
             </el-form-item>
           </el-col>
           <el-col :lg="24">
@@ -308,7 +314,6 @@ function handleAdd() {
   // }
   // 기본 설정 - 문장:0
   form.value.categoryType = 0
-  form.value.categoryType = 0
 }
 
 // 删除按钮操作
@@ -339,16 +344,40 @@ function handleUpdate(row) {
       opertype.value = 2
 
       form.value = {
-        ...data
+        ...data,
+        attributeJson: data.attributeJson != null && data.attributeJson.length > 0 ? data.attributeJson.split(',') : []
       }
     }
   })
+}
+
+// 自定义验证函数 - 检查标签是否重复
+const validateTag = (tag) => {
+  alert()
+  // 转换为小写去除大小写差异（可选）
+  const lowerCaseTag = tag.toLowerCase().trim();
+  const lowerCaseTags = this.tags.map(t => t.toLowerCase().trim());
+  
+  // 如果已存在相同的标签（不区分大小写）
+  if (lowerCaseTags.includes(lowerCaseTag)) {
+    this.$message.warning(`标签 "${tag}" 已存在！`);
+    return false;
+  }
+  
+  // 检查长度等其他规则（可选）
+  if (tag.length > 20) {
+    this.$message.warning("标签长度不能超过20个字符");
+    return false;
+  }
+  
+  return true;
 }
 
 // 表单提交
 function submitForm() {
   proxy.$refs['formRef'].validate((valid) => {
     if (valid) {
+      form.value.attributeJson = form.value.attributeJson.toString()
       if (form.value.categoryId != undefined && opertype.value === 2) {
         updateArticleCategory(form.value)
           .then((res) => {
