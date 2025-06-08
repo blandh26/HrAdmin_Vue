@@ -12,13 +12,25 @@
             <MdEditor v-model="form.content" :showToolbarName="true" :theme="settingsStore.codeMode" :onUploadImg="onUploadImg" />
           </el-form-item>
         </el-col>
-        <el-col :lg="24">
-          <el-form-item prop="abstractText">
+        <el-col :lg="2">
+          <el-form-item>
+            <UploadImage ref="uploadRef" v-model="form.coverUrl" :limit="1" :fileSize="15" style="width: 90px">
+              <template #icon>
+                <div class="upload-wrap">
+                  <el-icon class="avatar-uploader-icon"><plus /></el-icon>
+                  <div>请选择封面</div>
+                </div>
+              </template>
+            </UploadImage>
+          </el-form-item>
+        </el-col>
+        <el-col :lg="22">
+          <el-form-item prop="abstractText" label="文章摘要" label-position="top">
             <el-input v-model="form.abstractText" type="textarea" show-word-limit maxlength="100" placeholder="请输入文章摘要（必须）" />
           </el-form-item>
         </el-col>
 
-        <el-col :lg="8">
+        <el-col :lg="4">
           <el-form-item prop="categoryId" label="分类" label-position="top">
             <el-cascader
               class="w100"
@@ -29,12 +41,95 @@
               v-model="form.categoryId" />
           </el-form-item>
         </el-col>
-        <el-col :lg="16">
+        <el-col :lg="20">
           <el-form-item label="标签" label-position="top">
             <el-input-tag v-model="form.dynamicTags" :max="10" :maxlength="10" clearable trigger="Enter" placeholder="请输入标签" />
           </el-form-item>
         </el-col>
-        <el-col :lg="8">
+        <el-col :lg="4">
+          <el-form-item label="手机号码" label-position="top">
+            <el-input v-model="form.phone" placeholder="请输入手机号码" />
+          </el-form-item>
+        </el-col>
+        <el-col :lg="4">
+          <el-form-item label="微信" label-position="top">
+            <el-input v-model="form.weChat" placeholder="请输入微信" />
+          </el-form-item>
+        </el-col>
+        <el-col :lg="4">
+          <el-form-item label="Kakao" label-position="top">
+            <el-input v-model="form.kaKao" placeholder="请输入Kakao" />
+          </el-form-item>
+        </el-col>
+        <el-col :lg="4">
+          <el-form-item label="邮箱" label-position="top">
+            <el-input v-model="form.email" :maxlength="13" placeholder="请输入邮箱" />
+          </el-form-item>
+        </el-col>
+        <el-col :lg="4">
+          <el-form-item label="发布时间" label-position="top">
+            <el-date-picker v-model="form.createTime" type="datetime" placeholder="发布时间大于当前时间定时发布。" format="YYYY/MM/DD HH:mm:ss" />
+          </el-form-item>
+        </el-col>
+        <el-col :lg="4">
+          <el-form-item label="截止时间" label-position="top">
+            <el-date-picker v-model="form.endTime" type="date" placeholder="截止时间结束不展示了。可以延期操作。" format="YYYY/MM/DD" />
+          </el-form-item>
+        </el-col>
+        <el-col :lg="4">
+          <el-form-item prop="选择地区" label="分类" label-position="top">
+            <el-cascader :options="categoryOptions" clearable placeholder="选择地区"/>
+          </el-form-item>
+        </el-col>
+        
+      </el-row>
+      <el-row class="mb10" :gutter="10">
+        <el-col :lg="4">
+          <el-form-item>
+            <template #label>
+              <span>
+                <el-tooltip content="本分类区域置顶显示" placement="top">
+                  <el-icon :size="15">
+                    <questionFilled />
+                  </el-icon>
+                </el-tooltip>
+                是否置顶
+              </span>
+            </template>
+            <el-switch v-model="form.isTop" inline-prompt :active-value="1" :in-active-value="0" active-text="是" inactive-text="否" />
+          </el-form-item>
+        </el-col>
+        <el-col :lg="4">
+          <el-form-item>
+            <template #label>
+              <span>
+                <el-tooltip content="每个内容页面下方显示推荐内容" placement="top">
+                  <el-icon :size="15">
+                    <questionFilled />
+                  </el-icon>
+                </el-tooltip>
+                是否推荐
+              </span>
+            </template>
+            <el-switch v-model="form.isRecommend" inline-prompt :active-value="1" :in-active-value="0" active-text="是" inactive-text="否" />
+          </el-form-item>
+        </el-col>
+        <el-col :lg="4">
+          <el-form-item>
+            <template #label>
+              <span>
+                <el-tooltip content="本分类的列表页面热点区域" placement="top">
+                  <el-icon :size="15">
+                    <questionFilled />
+                  </el-icon>
+                </el-tooltip>
+                是否热点
+              </span>
+            </template>
+            <el-switch v-model="form.isHot" inline-prompt :active-value="1" :in-active-value="0" active-text="是" inactive-text="否" />
+          </el-form-item>
+        </el-col>
+        <el-col :lg="4">
           <el-form-item>
             <template #label>
               <span>
@@ -47,19 +142,6 @@
               </span>
             </template>
             <el-switch v-model="form.isPublic" inline-prompt :active-value="1" :in-active-value="0" active-text="是" inactive-text="否" />
-          </el-form-item>
-        </el-col>
-
-        <el-col :lg="24">
-          <el-form-item>
-            <UploadImage ref="uploadRef" v-model="form.coverUrl" :limit="1" :fileSize="15" style="width: 90px">
-              <template #icon>
-                <div class="upload-wrap">
-                  <el-icon class="avatar-uploader-icon"><plus /></el-icon>
-                  <div>请选择封面</div>
-                </div>
-              </template>
-            </UploadImage>
           </el-form-item>
         </el-col>
       </el-row>
