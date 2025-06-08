@@ -61,8 +61,8 @@
       :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
       <el-table-column type="selection" width="50" />
 
-      <el-table-column prop="name" label="目录名" :show-overflow-tooltip="true" />
-      <el-table-column prop="icon" label="图标" :show-overflow-tooltip="true">
+      <el-table-column prop="name" label="目录名" width="180px":show-overflow-tooltip="true" />
+      <el-table-column prop="icon" label="图标" width="90px" :show-overflow-tooltip="true">
         <template #default="{ row }">
           <svg-icon :name="row.icon" v-if="row.icon"></svg-icon>
           {{ row.icon }}
@@ -73,14 +73,14 @@
           <image-preview :src="row.bgImg" width="50px" v-if="row.bgImg" split=","></image-preview>
         </template>
       </el-table-column>
-      <el-table-column prop="categoryType" label="分类" align="center">
+      <!-- <el-table-column prop="categoryType" label="分类" align="center">
         <template #default="{ row }">
           <dict-tag :options="categoryTypeOptions" :value="row.categoryType"></dict-tag>
         </template>
-      </el-table-column>
+      </el-table-column> -->
 
-      <el-table-column prop="categoryId" label="目录id" sortable align="center" />
-      <el-table-column prop="orderNum" label="排序" sortable align="center">
+      <el-table-column prop="categoryId" label="目录id" width="90px" sortable align="center" />
+      <el-table-column prop="orderNum" label="排序" width="80px" sortable align="center">
         <template #default="scope">
           <span v-show="editIndex != scope.row.categoryId" @click="editCurrRow(scope.row.categoryId)">{{ scope.row.orderNum }}</span>
           <el-input
@@ -91,12 +91,12 @@
         </template>
       </el-table-column>
       <el-table-column prop="introduce" label="介绍" :show-overflow-tooltip="true" />
-      <el-table-column prop="createTime" label="添加时间" align="center" :show-overflow-tooltip="true" />
-
+      <el-table-column prop="templatePath" label="模板路径" :show-overflow-tooltip="true" />
+      <el-table-column prop="attributeTable" label="属性值表名" :show-overflow-tooltip="true" />
+      <!-- <el-table-column prop="createTime" label="添加时间" align="center" :show-overflow-tooltip="true" />
       <el-table-column prop="parentId" label="父级id" align="center" />
-
       <el-table-column prop="articleNum" label="文章数" align="center" />
-      <el-table-column prop="joinNum" label="加入人数" align="center" />
+      <el-table-column prop="joinNum" label="加入人数" align="center" /> -->
 
       <el-table-column label="操作" align="center" width="140">
         <template #default="scope">
@@ -145,12 +145,6 @@
               </el-select>
             </el-form-item>
           </el-col>
-          <el-col :lg="24">
-            <el-form-item label="目录名" prop="name">
-              <el-input v-model="form.name" placeholder="请输入目录名" />
-            </el-form-item>
-          </el-col>
-
           <el-col :lg="12">
             <el-form-item label="图标" prop="icon">
               <el-popover placement="bottom" :width="540" trigger="click">
@@ -168,10 +162,14 @@
               </el-popover>
             </el-form-item>
           </el-col>
-
           <el-col :lg="12">
             <el-form-item label="排序" prop="orderNum">
               <el-input-number v-model="form.orderNum" placeholder="请输入排序值" />
+            </el-form-item>
+          </el-col>
+          <el-col :lg="24">
+            <el-form-item label="目录名" prop="name">
+              <el-input v-model="form.name" placeholder="请输入目录名" />
             </el-form-item>
           </el-col>
           <el-col :lg="24">
