@@ -31,7 +31,7 @@
         </el-col>
         <el-col :lg="16">
           <el-form-item label="标签" label-position="top">
-            <el-input-tag v-model="form.dynamicTags" :max="5" :maxlength="10" clearable trigger="Enter" placeholder="请输入标签" />
+            <el-input-tag v-model="form.dynamicTags" :max="10" :maxlength="10" clearable trigger="Enter" placeholder="请输入标签" />
           </el-form-item>
         </el-col>
         <el-col :lg="8">
@@ -182,8 +182,8 @@ function handleCloseTag(tag) {
 }
 
 const showInput = () => {
-  if (form.value.dynamicTags.length >= 5) {
-    proxy.$modal.msgError('最多5个标签')
+  if (form.value.dynamicTags.length >= 10) {
+    proxy.$modal.msgError('最多10个标签')
     return
   }
   inputVisible.value = true
