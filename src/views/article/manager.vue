@@ -7,6 +7,9 @@
       <el-form-item label="摘要" prop="abstractText">
         <el-input v-model="queryParams.abstractText" placeholder="请输入摘要" />
       </el-form-item>
+      <el-form-item label="联系方式" prop="contactDetails">
+        <el-input v-model="queryParams.contactDetails" placeholder="请输入联系方式" />
+      </el-form-item>
       <el-form-item label="分类" prop="categoryId">
         <el-cascader
           class="w100"
@@ -16,6 +19,16 @@
           clearable
           v-model="queryParams.categoryId" />
       </el-form-item>
+      <el-form-item label="地区" prop="categoryId">
+        <el-cascader
+          class="w100"
+          :options="categoryOptions"
+          :props="{ checkStrictly: true, value: 'categoryId', label: 'name', emitPath: false }"
+          placeholder="请选择地区"
+          clearable
+          v-model="queryParams.categoryId" />
+      </el-form-item>
+      
       <el-form-item label="审核状态" prop="auditStatus">
         <el-radio-group v-model="queryParams.auditStatus" @change="handleQuery()">
           <el-radio-button value="">全部</el-radio-button>
