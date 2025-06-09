@@ -99,28 +99,22 @@
       <right-toolbar v-model:showSearch="showSearch" @queryTable="getList" :columns="columns"></right-toolbar>
     </el-row>
 
-    <el-table
-      :data="dataList"
-      height="600px"
-      v-loading="loading"
-      @selection-change="handleSelectionChange"
-      highlight-current-row
-      @sort-change="sortChange"
-      ref="table">
+    <el-table :data="dataList" height="600px" v-loading="loading"
+      @selection-change="handleSelectionChange" highlight-current-row @sort-change="sortChange"ref="table">
       <el-table-column type="selection" width="50" align="center" :selectable="checkSelectable" />
       <el-table-column prop="cid" label="文章信息" width="130">
         <template #default="{ row }">
           <div @click="handleView(row)">内容id：{{ row.cid }}</div>
           <div>作者：{{ row.authorName }}</div>
-          <div>标签：{{ row.tags }}</div>
+          <!-- <div>标签：{{ row.tags }}</div> -->
         </template>
       </el-table-column>
-      <el-table-column label="分类">
+      <el-table-column label="分类" width="100">
         <template #default="{ row }">
           <div v-if="row.categoryNav">{{ row.categoryNav.name }}</div>
         </template>
       </el-table-column>
-      <el-table-column prop="title" label="标题" width="120" :show-overflow-tooltip="true">
+      <el-table-column prop="title" label="标题"  :show-overflow-tooltip="true">
         <template #default="scope">
           <el-button link type="primary" @click="handleView(scope.row)">{{ scope.row.title }}</el-button>
         </template>
@@ -130,12 +124,15 @@
           <image-preview :src="row.coverUrl" split="," style="width: 40px" v-if="row.coverUrl"></image-preview>
         </template>
       </el-table-column>
-      <!-- <el-table-column prop="authorName" label="作者" width="80"> </el-table-column> -->
-      <!-- <el-table-column prop="fmt_type" label="编辑器类型" width="100"> </el-table-column> -->
-      <!-- <el-table-column prop="tags" label="标签" width="100" :show-overflow-tooltip="true"> </el-table-column> -->
+      <el-table-column prop="authorName" label="作者" width="80"> </el-table-column>
+      <el-table-column prop="editorType" label="编辑器类型" v-if="columns.showColumn('editorType')" width="100"> </el-table-column>
+      <el-table-column prop="tags" label="标签" width="100" :show-overflow-tooltip="true"> </el-table-column>
       <el-table-column prop="hits" label="浏览" width="80" align="center" sortable> </el-table-column>
-      <el-table-column prop="praiseNum" label="赞" width="80" align="center" sortable> </el-table-column>
-      <el-table-column prop="commentNum" label="评论" width="80" align="center" sortable> </el-table-column>
+      <el-table-column prop="praiseNum" label="赞" width="80" align="center" v-if="columns.showColumn('praiseNum')" sortable> </el-table-column>
+      <el-table-column prop="commentNum" label="评论" width="80" align="center" v-if="columns.showColumn('commentNum')" sortable> </el-table-column>
+      <el-table-column prop="country" label="国家" width="80" align="center" v-if="columns.showColumn('country')" sortable> </el-table-column>
+      <el-table-column prop="province" label="省" width="80" align="center" v-if="columns.showColumn('province')" sortable> </el-table-column>
+      <el-table-column prop="city" label="市" width="80" align="center" v-if="columns.showColumn('city')" sortable> </el-table-column>
       <el-table-column prop="abstractText" label="摘要" v-if="columns.showColumn('abstractText')"> </el-table-column>
       <el-table-column prop="status" align="center" label="状态" width="90">
         <template #default="scope">
@@ -159,6 +156,42 @@
             :inactive-value="0"></el-switch>
         </template>
       </el-table-column>
+      <el-table-column label="推荐" prop="isRecommend" width="90" align="center" v-if="columns.showColumn('isRecommend')" sortable>
+        <template #default="scope">
+          <el-switch
+            v-model="scope.row.isRecommend"
+            inline-prompt
+            disabled
+            active-text="是"
+            inactive-text="否"
+            :active-value="1"
+            :inactive-value="0"></el-switch>
+        </template>
+      </el-table-column>
+      <el-table-column label="热度" prop="isHot" width="90" align="center" v-if="columns.showColumn('isHot')" sortable>
+        <template #default="scope">
+          <el-switch
+            v-model="scope.row.isHot"
+            inline-prompt
+            disabled
+            active-text="是"
+            inactive-text="否"
+            :active-value="1"
+            :inactive-value="0"></el-switch>
+        </template>
+      </el-table-column>
+      <el-table-column label="幻灯片" prop="isSlideshow" width="90" align="center" v-if="columns.showColumn('isSlideshow')" sortable>
+        <template #default="scope">
+          <el-switch
+            v-model="scope.row.isSlideshow"
+            inline-prompt
+            disabled
+            active-text="是"
+            inactive-text="否"
+            :active-value="1"
+            :inactive-value="0"></el-switch>
+        </template>
+      </el-table-column>
       <el-table-column label="公开" align="center" prop="isPublic" width="90">
         <template #default="scope">
           <el-switch
@@ -171,9 +204,14 @@
             disabled></el-switch>
         </template>
       </el-table-column>
-      <el-table-column prop="createTime" label="发布时间" width="128" :show-overflow-tooltip="true">
+      <el-table-column prop="createTime" label="发布时间" width="128" v-if="columns.showColumn('createTime')" :show-overflow-tooltip="true">
         <template #default="scope">
           {{ showTime(scope.row.createTime) }}
+        </template>
+      </el-table-column>
+      <el-table-column prop="updateTime" label="更新时间" width="128" :show-overflow-tooltip="true">
+        <template #default="scope">
+          {{ showTime(scope.row.updateTime) }}
         </template>
       </el-table-column>
       <el-table-column label="操作" width="130" fixed="right">
@@ -264,7 +302,18 @@ const data = reactive({
 })
 const columns = ref([
   { visible: false, prop: 'abstractText', label: '摘要' },
-  { visible: false, prop: 'isTop', label: '置顶' }
+  { visible: false, prop: 'tags', label: '标签' },
+  { visible: false, prop: 'editorType', label: '编辑器类型' },
+  { visible: false, prop: 'praiseNum', label: '点赞数' },
+  { visible: false, prop: 'commentNum', label: '评论数' },
+  { visible: false, prop: 'country', label: '国家' },
+  { visible: false, prop: 'province', label: '省' },
+  { visible: false, prop: 'city', label: '市' },
+  { visible: false, prop: 'isTop', label: '置顶' },
+  { visible: false, prop: 'isHot', label: '热度' },
+  { visible: false, prop: 'isRecommend', label: '推荐' },
+  { visible: false, prop: 'isSlideshow', label: '幻灯片' },
+  { visible: false, prop: 'createTime', label: '发布时间' }
 ])
 const queryForm = ref()
 const { queryParams, options } = toRefs(data)
