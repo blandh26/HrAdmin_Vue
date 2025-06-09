@@ -9,7 +9,7 @@
         </el-col>
         <el-col :lg="24">
           <el-form-item prop="content" label="">
-            <MdEditor v-model="form.content" :showToolbarName="true" :theme="settingsStore.codeMode" :onUploadImg="onUploadImg" />
+            <MdEditor v-model="form.content" :showToolbarName="false" :theme="settingsStore.codeMode" :onUploadImg="onUploadImg" />
           </el-form-item>
         </el-col>
         <el-col :lg="2">
@@ -77,7 +77,7 @@
           </el-form-item>
         </el-col>
         <el-col :lg="4">
-          <el-form-item prop="选择地区" label="分类" label-position="top">
+          <el-form-item prop="选择地区" label="选择地区" label-position="top">
             <el-cascader :options="categoryOptions" clearable placeholder="选择地区"/>
           </el-form-item>
         </el-col>
@@ -93,10 +93,11 @@
                     <questionFilled />
                   </el-icon>
                 </el-tooltip>
-                是否置顶
+                置顶
               </span>
             </template>
             <el-switch v-model="form.isTop" inline-prompt :active-value="1" :in-active-value="0" active-text="是" inactive-text="否" />
+            <el-input-number v-model="form.topOrder" :min="0" :max="10" controls-position="right" style="width: 80px;margin-left: 10px;"/>
           </el-form-item>
         </el-col>
         <el-col :lg="4">
@@ -108,10 +109,11 @@
                     <questionFilled />
                   </el-icon>
                 </el-tooltip>
-                是否推荐
+                推荐
               </span>
             </template>
             <el-switch v-model="form.isRecommend" inline-prompt :active-value="1" :in-active-value="0" active-text="是" inactive-text="否" />
+            <el-input-number v-model="form.recommendOrder" :min="0" :max="10" controls-position="right" style="width: 80px;margin-left: 10px;"/>
           </el-form-item>
         </el-col>
         <el-col :lg="4">
@@ -123,10 +125,27 @@
                     <questionFilled />
                   </el-icon>
                 </el-tooltip>
-                是否热点
+                热点
               </span>
             </template>
             <el-switch v-model="form.isHot" inline-prompt :active-value="1" :in-active-value="0" active-text="是" inactive-text="否" />
+            <el-input-number v-model="form.hotOrder" :min="0" :max="10" controls-position="right" style="width: 80px;margin-left: 10px;"/>
+          </el-form-item>
+        </el-col>
+        <el-col :lg="4">
+          <el-form-item>
+            <template #label>
+              <span>
+                <el-tooltip content="本分类的列表页面幻灯片" placement="top">
+                  <el-icon :size="15">
+                    <questionFilled />
+                  </el-icon>
+                </el-tooltip>
+                幻灯片
+              </span>
+            </template>
+            <el-switch v-model="form.isSlideshow" inline-prompt :active-value="1" :in-active-value="0" active-text="是" inactive-text="否" />
+            <el-input-number v-model="form.slideshowOrder" :min="0" :max="10" controls-position="right" style="width: 80px;margin-left: 10px;"/>
           </el-form-item>
         </el-col>
         <el-col :lg="4">
@@ -194,6 +213,12 @@ const { form, rules } = toRefs(data)
 const cid = route.query.cid
 form.value.cid = cid
 
+// 提取 Markdown 中第一个图片地址
+const extractFirstImageUrl = (markdown) => {
+  const match = markdown.match(/!\[.*?\]\((.*?)\)/);
+  return match ? match[1] : null;
+}
+
 /** 查询菜单下拉树结构 */
 function getCategoryTreeselect() {
   treelistArticleCategory({}).then((res) => {
@@ -228,6 +253,7 @@ function handlePublish(status) {
 
   proxy.$refs['formRef'].validate((valid) => {
     if (valid) {
+      form.value.coverUrl = extractFirstImageUrl(form.value.content);// 提取并赋值
       if (form.value.cid != undefined) {
         updateArticle(form.value).then((res) => {
           if (res.code == 200) {

@@ -32,14 +32,14 @@
           </el-radio-button>
         </el-radio-group>
       </el-form-item>
-      <el-form-item prop="articleType">
+      <!-- <el-form-item prop="articleType">
         <el-radio-group v-model="queryParams.articleType" @change="handleQuery()">
           <el-radio-button value="">全部</el-radio-button>
           <el-radio-button v-for="item in options.sys_article_type" :key="item.dictValue" :value="item.dictValue">
             {{ item.dictLabel }}
           </el-radio-button>
         </el-radio-group>
-      </el-form-item>
+      </el-form-item> -->
       <el-form-item label="是否公开" prop="isPublic">
         <el-radio-group v-model="queryParams.isPublic" @change="handleQuery()">
           <el-radio-button value="">全部</el-radio-button>
@@ -49,12 +49,16 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item label="是否置顶" prop="isTop">
-        <el-radio-group v-model="queryParams.isTop" @change="handleQuery()">
-          <el-radio-button value="">全部</el-radio-button>
-          <el-radio-button v-for="item in options.isPublicOptions" :key="item.dictValue" :value="item.dictValue">
-            {{ item.dictLabel }}
-          </el-radio-button>
-        </el-radio-group>
+        <el-checkbox v-model="queryParams.isTop" :true-label="1" :false-label="0" @change="handleQuery();"></el-checkbox>
+      </el-form-item>
+      <el-form-item label="是否推荐" prop="isRecommend">
+        <el-checkbox v-model="queryParams.isRecommend" :true-label="1" :false-label="0" @change="handleQuery();"></el-checkbox>
+      </el-form-item>
+      <el-form-item label="是否热点" prop="isHot">
+        <el-checkbox v-model="queryParams.isHot" :true-label="1" :false-label="0" @change="handleQuery();"></el-checkbox>
+      </el-form-item>
+      <el-form-item label="是否幻灯片" prop="isSlideshow">
+        <el-checkbox v-model="queryParams.isSlideshow" :true-label="1" :false-label="0" @change="handleQuery();"></el-checkbox>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="search" @click="handleQuery">搜索</el-button>
@@ -76,9 +80,9 @@
       <el-col :span="1.5">
         <el-button type="primary" plain icon="plus" v-hasPermi="['system:article:add']" size="small" @click="handleAdd">发布文章</el-button>
       </el-col>
-      <el-col :span="1.5">
+      <!-- <el-col :span="1.5">
         <el-button type="danger" plain icon="plus" v-hasPermi="['system:article:add']" size="small" @click="handleMonents">发布动态</el-button>
-      </el-col>
+      </el-col> -->
       <right-toolbar v-model:showSearch="showSearch" @queryTable="getList" :columns="columns"></right-toolbar>
     </el-row>
 
@@ -220,7 +224,10 @@ const data = reactive({
     sortType: 'desc',
     status: '',
     isPublic: '',
-    isTop: '',
+    isTop: 0,
+    isHot: 0,
+    isRecommend: 0,
+    isSlideshow: 0,
     articleType: '',
     auditStatus: ''
   },
