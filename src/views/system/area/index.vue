@@ -54,9 +54,7 @@
 		<el-table-column label="操作" align="center" width="140">
 		  <template #default="scope">
 			<el-button v-hasPermi="['area:edit']" type="success" icon="edit" title="编辑" 
-			  @click="handleUpdate(scope.row)"></el-button>      
-			<el-button v-hasPermi="['area:delete']" type="danger" icon="delete" title="删除" 
-			  @click="handleDelete(scope.row)"></el-button>
+			  @click="handleUpdate(scope.row)"></el-button>
 		  </template>      
 		</el-table-column>
 	  </el-table>
@@ -137,9 +135,8 @@
   </template>
   
   <script setup name="sysarea">
-  import { treelistSysArea, listSysArea, 
-   addSysArea, delSysArea, updateSysArea,getSysArea,
-   } from '@/api/system/sysarea.js'
+  import { treelistSysArea, listSysArea, addSysArea, delSysArea, updateSysArea,getSysArea,} 
+  from '@/api/system/sysarea.js'
   
   const { proxy } = getCurrentInstance()
   const isExpandAll = ref(false)

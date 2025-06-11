@@ -15,7 +15,9 @@
       </template>
       <!-- <size-select title="布局大小" class="right-menu-item" /> -->
       <LangSelect title="语言设置" class="right-menu-item" />
-
+      <div class="right-menu-item mr10" @click="handleCommand('setLayout')">
+        <el-icon><Setting /></el-icon>
+      </div>
       <div class="right-menu-item">
         <el-dropdown @command="handleCommand" trigger="click" style="vertical-align: middle">
           <span class="avatar-wrapper">
@@ -43,9 +45,6 @@
             </el-dropdown-menu>
           </template>
         </el-dropdown>
-      </div>
-      <div class="right-menu-item mr10" @click="handleCommand('setLayout')">
-        <el-icon><Setting /></el-icon>
       </div>
     </div>
   </div>
